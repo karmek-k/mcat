@@ -15,4 +15,9 @@ class SqliteDatabase
         $tables = file_get_contents('database/tables.sql');
         $this->db->exec($tables);
     }
+
+    // temporary, will be deleted
+    public function getPdo() {
+        return $this->db;
+    }
 }
