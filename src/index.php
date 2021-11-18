@@ -18,9 +18,22 @@ $app->addErrorMiddleware(true, true, true);
 $app->get('/', function (Request $req, Response $res) {
     $db = new SqliteDatabase();
 
+    foreach ($db->getPdo()->query('SELECT * FROM tracks') as $track) {
+        var_dump($track);
+    }
+
     $res->getBody()->write('Hello world!');
 
     return $res;
+});
+
+$app->get('/seed', function (Request $req, Response $res) {
+    // I'll remove duplicated code
+    $db = new SqliteDatabase();
+
+    $db->getPdo()->exec('INSERT INTO tracks (title) VALUES ("hi")');
+
+    return $res->withHeader('Location', '/');
 });
 
 $app->run();
