@@ -8,5 +8,8 @@
             "KarmekK\\Mcat\\": "src/"
         }
     },
-    "require": {}
+    "require": {
+        "slim/slim": "^4.9",
+        "slim/http": "^1.2"
+    }
 }
