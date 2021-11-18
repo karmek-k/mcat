@@ -1,0 +1,12 @@
+{
+    "name": "karmek-k/mcat",
+    "description": "Self-hosted music catalog",
+    "type": "project",
+    "license": "AGPL-3.0-only",
+    "autoload": {
+        "psr-4": {
+            "KarmekK\\Mcat\\": "src/"
+        }
+    },
+    "require": {}
+}
