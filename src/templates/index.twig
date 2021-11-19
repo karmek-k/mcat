@@ -1,0 +1,13 @@
+{% extends 'base.twig' %}
+
+{% block body %}
+<table>
+  <tbody>
+    {% for track in tracks %}
+    <tr>
+      <td>{{ track.title }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

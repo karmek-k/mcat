@@ -11,6 +11,7 @@ use KarmekK\Mcat\Database\TrackRepo;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
+use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
 
 AppFactory::setContainer(require 'config/container.php');
@@ -22,11 +23,10 @@ $app->add(TwigMiddleware::create($app, require 'config/twig.php'));
 $app->get('/tracks', function (Request $req, Response $res) {
     /** @var TrackRepo */
     $trackRepo = $this->get(TrackRepo::class);
-    $tracks = $trackRepo->findAll();
 
-    $res->getBody()->write(json_encode($tracks));
-
-    return $res;
+    return Twig::fromRequest($req)->render($res, 'index.twig', [
+        'tracks' => $trackRepo->findAll(),
+    ]);
 });
 
 $app->get('/tracks/{id}', function (Request $req, Response $res, array $args) {
