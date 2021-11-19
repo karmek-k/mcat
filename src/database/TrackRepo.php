@@ -20,8 +20,9 @@ class TrackRepo
     public function findAll(): array
     {
         $results = [];
+        $sql = 'SELECT * FROM tracks';
 
-        foreach ($this->pdo->query('SELECT id, title FROM tracks') as $row) {
+        foreach ($this->pdo->query($sql) as $row) {
             $t = new Track();
             $t->id = $row['id'];
             $t->title = $row['title'];
@@ -30,5 +31,25 @@ class TrackRepo
         }
 
         return $results;
+    }
+
+    public function find(int $id): ?Track
+    {
+        $sql = 'SELECT * FROM tracks WHERE id = :id';
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        
+        $row = $stmt->fetch();
+        if (!$row) {
+            return null;
+        }
+
+        // TODO: delete duplicated code
+        $t = new Track();
+        $t->id = $row['id'];
+        $t->title = $row['title'];
+
+        return $t;
     }
 }

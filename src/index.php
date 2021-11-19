@@ -27,11 +27,21 @@ $app->get('/', function (Request $req, Response $res) {
     return $res;
 });
 
+$app->get('/track/{id}', function (Request $req, Response $res, array $args) {
+    /** @var TrackRepo */
+    $trackRepo = $this->get(TrackRepo::class);
+    $track = $trackRepo->find($args['id']);
+
+    $res->getBody()->write(json_encode($track));
+
+    return $res; 
+});
+
 $app->get('/seed', function (Request $req, Response $res) {
     /** @var Database */
     $db = $this->get(Database::class);
 
-    $db->getPdo()->exec('INSERT INTO tracks (title) VALUES ("hi")');
+    $db->getPdo()->exec('INSERT INTO tracks (title) VALUES ("bye")');
 
     return $res->withHeader('Location', '/');
 });
