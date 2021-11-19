@@ -1,13 +1,15 @@
 {% extends 'base.twig' %}
 
 {% block body %}
-<table>
-  <tbody>
-    {% for track in tracks %}
-    <tr>
-      <td>{{ track.title }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+  <table>
+    <tbody>
+      {% for track in tracks %}
+      <tr>
+        <td>
+          <a href="{{ url_for('track_details', { 'id': track.id } ) }}">{{ track.title }}</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}

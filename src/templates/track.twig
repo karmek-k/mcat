@@ -1,0 +1,6 @@
+{% extends 'base.twig' %}
+
+{% block body %}
+  <p>{{ track.title }}</p>
+  <a href="{{ url_for('track_list') }}">go back</a>
+{% endblock %}

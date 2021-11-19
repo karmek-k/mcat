@@ -27,17 +27,16 @@ $app->get('/tracks', function (Request $req, Response $res) {
     return Twig::fromRequest($req)->render($res, 'index.twig', [
         'tracks' => $trackRepo->findAll(),
     ]);
-});
+})->setName('track_list');
 
 $app->get('/tracks/{id}', function (Request $req, Response $res, array $args) {
     /** @var TrackRepo */
     $trackRepo = $this->get(TrackRepo::class);
-    $track = $trackRepo->find($args['id']);
 
-    $res->getBody()->write(json_encode($track));
-
-    return $res; 
-});
+    return Twig::fromRequest($req)->render($res, 'track.twig', [
+        'track' => $trackRepo->find($args['id']),
+    ]);
+})->setName('track_details');
 
 $app->get('/seed', function (Request $req, Response $res) {
     /** @var TrackRepo */
