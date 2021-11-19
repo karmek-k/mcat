@@ -6,17 +6,18 @@ require __DIR__ . '/../vendor/autoload.php';
 
 require 'database/database.php'; // TODO: autoload
 
-use KarmekK\Mcat\Database\Database;
 use KarmekK\Mcat\Database\Models\Track;
 use KarmekK\Mcat\Database\TrackRepo;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
+use Slim\Views\TwigMiddleware;
 
 AppFactory::setContainer(require 'config/container.php');
 $app = AppFactory::create();
 
 $app->addErrorMiddleware(true, true, true);
+$app->add(TwigMiddleware::create($app, require 'config/twig.php'));
 
 $app->get('/tracks', function (Request $req, Response $res) {
     /** @var TrackRepo */
