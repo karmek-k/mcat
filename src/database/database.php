@@ -4,7 +4,13 @@ namespace KarmekK\Mcat\Database;
 
 use PDO;
 
-class SqliteDatabase
+interface Database
+{
+    function __construct(string $dbName);
+    function getPdo(): PDO;
+}
+
+class SqliteDatabase implements Database
 {
     private PDO $db;
 
