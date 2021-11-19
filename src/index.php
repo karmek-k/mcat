@@ -7,6 +7,7 @@ require __DIR__ . '/../vendor/autoload.php';
 require 'database/database.php'; // TODO: autoload
 
 use KarmekK\Mcat\Database\Database;
+use KarmekK\Mcat\Database\Models\Track;
 use KarmekK\Mcat\Database\TrackRepo;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -38,10 +39,12 @@ $app->get('/tracks/{id}', function (Request $req, Response $res, array $args) {
 });
 
 $app->get('/seed', function (Request $req, Response $res) {
-    /** @var Database */
-    $db = $this->get(Database::class);
+    /** @var TrackRepo */
+    $trackRepo = $this->get(TrackRepo::class);
+    $track = new Track();
+    $track->title = 'with the lights out it\'s less dangerous';
 
-    $db->getPdo()->exec('INSERT INTO tracks (title) VALUES ("bye")');
+    $trackRepo->insert($track);
 
     return $res->withHeader('Location', '/');
 });

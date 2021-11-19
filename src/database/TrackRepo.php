@@ -36,6 +36,17 @@ class TrackRepo
         return $this->mapRow($row);
     }
 
+    public function insert(Track $t): bool
+    {
+        $sql = 'INSERT INTO tracks (title) VALUES (:title)';
+
+        $stmt = $this->pdo->prepare($sql);
+        
+        return $stmt->execute([
+            'title' => $t->title
+        ]);
+    }
+
     private function mapRow(iterable $row): Track
     {
         if (!$row) {
