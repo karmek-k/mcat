@@ -19,18 +19,10 @@ class TrackRepo
      */
     public function findAll(): array
     {
-        $results = [];
         $sql = 'SELECT * FROM tracks';
+        $rows = $this->pdo->query($sql);
 
-        foreach ($this->pdo->query($sql) as $row) {
-            $t = new Track();
-            $t->id = $row['id'];
-            $t->title = $row['title'];
-
-            $results[] = $t;
-        }
-
-        return $results;
+        return $this->mapRows($rows);
     }
 
     public function find(int $id): ?Track
@@ -39,17 +31,33 @@ class TrackRepo
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(['id' => $id]);
-        
         $row = $stmt->fetch();
+
+        return $this->mapRow($row);
+    }
+
+    private function mapRow(iterable $row): Track
+    {
         if (!$row) {
             return null;
         }
-
-        // TODO: delete duplicated code
+        
         $t = new Track();
         $t->id = $row['id'];
         $t->title = $row['title'];
 
         return $t;
+    }
+
+    /** @var Track[] */
+    private function mapRows(iterable $rows): array
+    {
+        $results = [];
+
+        foreach ($rows as $row) {
+            $results[] = $this->mapRow($row);
+        }
+
+        return $results;
     }
 }
