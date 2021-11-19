@@ -16,8 +16,8 @@ class SqliteDatabase
         $this->db->exec($tables);
     }
 
-    // temporary, will be deleted
-    public function getPdo() {
+    public function getPdo(): PDO
+    {
         return $this->db;
     }
 }
