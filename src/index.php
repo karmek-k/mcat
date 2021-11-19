@@ -7,6 +7,7 @@ require __DIR__ . '/../vendor/autoload.php';
 require 'database/database.php'; // TODO: autoload
 
 use KarmekK\Mcat\Database\Database;
+use KarmekK\Mcat\Database\TrackRepo;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
@@ -17,14 +18,11 @@ $app = AppFactory::create();
 $app->addErrorMiddleware(true, true, true);
 
 $app->get('/', function (Request $req, Response $res) {
-    /** @var Database */
-    $db = $this->get(Database::class);
+    /** @var TrackRepo */
+    $trackRepo = $this->get(TrackRepo::class);
+    $tracks = $trackRepo->findAll();
 
-    foreach ($db->getPdo()->query('SELECT * FROM tracks') as $track) {
-        var_dump($track);
-    }
-
-    $res->getBody()->write('Hello world!');
+    $res->getBody()->write(json_encode($tracks));
 
     return $res;
 });
