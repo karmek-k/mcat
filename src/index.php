@@ -17,7 +17,7 @@ $app = AppFactory::create();
 
 $app->addErrorMiddleware(true, true, true);
 
-$app->get('/', function (Request $req, Response $res) {
+$app->get('/tracks', function (Request $req, Response $res) {
     /** @var TrackRepo */
     $trackRepo = $this->get(TrackRepo::class);
     $tracks = $trackRepo->findAll();
@@ -27,7 +27,7 @@ $app->get('/', function (Request $req, Response $res) {
     return $res;
 });
 
-$app->get('/track/{id}', function (Request $req, Response $res, array $args) {
+$app->get('/tracks/{id}', function (Request $req, Response $res, array $args) {
     /** @var TrackRepo */
     $trackRepo = $this->get(TrackRepo::class);
     $track = $trackRepo->find($args['id']);
