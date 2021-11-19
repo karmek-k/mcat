@@ -7,16 +7,11 @@ require __DIR__ . '/../vendor/autoload.php';
 require 'database/database.php'; // TODO: autoload
 
 use KarmekK\Mcat\Database\Database;
-use KarmekK\Mcat\Database\SqliteDatabase;
-use League\Container\Container;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 
-$container = new Container();
-$container->add(Database::class, SqliteDatabase::class);
-
-AppFactory::setContainer($container);
+AppFactory::setContainer(require 'config/container.php');
 $app = AppFactory::create();
 
 $app->addErrorMiddleware(true, true, true);
