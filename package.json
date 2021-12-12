@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/karmek-k/mcat#readme",
   "devDependencies": {
+    "html-webpack-plugin": "^5.5.0",
     "prettier": "^2.5.1",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1",
