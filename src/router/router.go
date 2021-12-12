@@ -6,6 +6,7 @@ import (
 	"github.com/karmek-k/mcat/src/handlers"
 )
 
+// SetupRouter creates a new router and configures it
 func SetupRouter() *gin.Engine {
 	r := gin.Default()
 
