@@ -14,7 +14,10 @@ tmp_dir = "tmp"
     "frontend",
     "node_modules"
   ]
-  exclude_file = []
+  exclude_file = [
+    "package.json",
+    "package-lock.json"
+  ]
   exclude_regex = ["_test.go"]
   exclude_unchanged = false
   follow_symlink = false
