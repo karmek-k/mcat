@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import "github.com/karmek-k/mcat/src/router"
 
 func main() {
-	fmt.Println("hello world")
+	r := router.SetupRouter()
+	
+	r.Run(":8000")
 }
