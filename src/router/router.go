@@ -1,19 +1,15 @@
 package router
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+
+	"github.com/karmek-k/mcat/src/handlers"
 )
 
 func SetupRouter() *gin.Engine {
 	r := gin.Default()
 
-	r.GET("/", func (c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"hello": "world",
-		})
-	})
+	r.GET("/", handlers.IndexHandler)
 
 	return r
 }
