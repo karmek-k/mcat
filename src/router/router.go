@@ -9,6 +9,8 @@ import (
 func SetupRouter() *gin.Engine {
 	r := gin.Default()
 
+	r.LoadHTMLGlob("frontend/templates/*")
+
 	r.GET("/", handlers.IndexHandler)
 
 	return r

@@ -7,7 +7,7 @@ import (
 )
 
 func IndexHandler(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"hello": "world",
+	c.HTML(http.StatusOK, "index.html", gin.H{
+		"string": "hi!",
 	})
 }
