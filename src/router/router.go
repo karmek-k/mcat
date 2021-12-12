@@ -1,18 +1,31 @@
 package router
 
 import (
-	"github.com/gin-gonic/gin"
+	"embed"
+	"io/fs"
+	"net/http"
 
-	"github.com/karmek-k/mcat/src/handlers"
+	"github.com/gin-gonic/gin"
 )
 
-// SetupRouter creates a new router and configures it
-func SetupRouter() *gin.Engine {
+func mustFS(embeddedFS *embed.FS) http.FileSystem {
+	sub, err := fs.Sub(embeddedFS, "frontend/build")
+
+	if err != nil {
+		panic(err)
+	}
+
+	return http.FS(sub)
+}
+
+// SetupRouter creates a new router and configures it.
+// You can also provide an embedded filesystem.
+func SetupRouter(embeddedFS *embed.FS) *gin.Engine {
 	r := gin.Default()
 
-	r.LoadHTMLGlob("frontend/templates/*")
-
-	r.GET("/", handlers.IndexHandler)
-
+	if embeddedFS != nil {
+		r.StaticFS("/", mustFS(embeddedFS))
+	}
+	
 	return r
 }
