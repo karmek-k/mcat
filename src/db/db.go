@@ -21,7 +21,7 @@ func init() {
 	)
 }
 
-// Creates a new gorm.DB instance with given dialector.
+// CreateDB creates a new gorm.DB instance with given dialector.
 // The dialector is a GORM driver's Open function value.
 func CreateDB(dialector gorm.Dialector) (*gorm.DB, error) {
 	db, err := gorm.Open(dialector, &gorm.Config{})
