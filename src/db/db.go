@@ -1,6 +1,7 @@
 package db
 
 import (
+	"github.com/karmek-k/mcat/src/models"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -15,7 +16,9 @@ func init() {
 		panic(err)
 	}
 
-	DB.AutoMigrate()
+	DB.AutoMigrate(
+		models.Track{},
+	)
 }
 
 // Creates a new gorm.DB instance with given dialector.
