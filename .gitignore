@@ -20,3 +20,4 @@ go.work
 tmp/
 node_modules/
 frontend/build/
+mcat.db
