@@ -5,7 +5,7 @@ type Track struct {
 
 	Title string `json:"title"`
 
-	AlbumID uint
+	AlbumID uint `json:"-"`
 	Album Album `json:"album"`
 
 	Genre string `json:"genre"`
