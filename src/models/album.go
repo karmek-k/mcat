@@ -1,15 +1,13 @@
 package models
 
-type Track struct {
+type Album struct {
 	ID uint `json:"id"`
 
 	ArtistID uint
 	Artist Artist `json:"artist"`
 
 	Title string `json:"title"`
+	Year int `json:"year"`
 
-	AlbumID uint
-	Album Album `json:"album"`
-
-	Genre string `json:"genre"`
+	Tracks []Track `json:"tracks"`
 }
