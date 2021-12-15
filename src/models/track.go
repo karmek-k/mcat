@@ -4,12 +4,12 @@ import "time"
 
 // TODO: add the commented out fields as relationships
 type Track struct {
-	ID uint
+	ID uint `json:"id"`
 	// Artist
-	Title string
+	Title string `json:"title"`
 	// Album
-	Year int
-	Genre string
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	Year int `json:"year"`
+	Genre string `json:"genre"`
+	CreatedAt time.Time `json:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
 }
