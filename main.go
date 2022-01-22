@@ -9,7 +9,7 @@ import (
 	"github.com/karmek-k/mcat/utils"
 )
 
-//go:embed frontend/build
+//go:embed frontend/dist
 var publicFiles embed.FS
 
 func main() {

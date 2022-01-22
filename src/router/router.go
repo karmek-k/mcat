@@ -10,7 +10,7 @@ import (
 )
 
 func mustFS(embeddedFS *embed.FS) http.FileSystem {
-	sub, err := fs.Sub(embeddedFS, "frontend/build")
+	sub, err := fs.Sub(embeddedFS, "frontend/dist")
 
 	if err != nil {
 		panic(err)
@@ -25,12 +25,12 @@ func SetupRouter(embeddedFS *embed.FS) *gin.Engine {
 	r := gin.Default()
 
 	if embeddedFS != nil {
-		r.StaticFS("/mcat", mustFS(embeddedFS))
+		r.StaticFS("/web", mustFS(embeddedFS))
 
 		// workaround for path conflict error
 		// https://stackoverflow.com/questions/36357791/gin-router-path-segment-conflicts-with-existing-wildcard
-		r.Any("/", func(c *gin.Context) {
-			c.Redirect(http.StatusPermanentRedirect, "/mcat")
+		r.GET("/", func(c *gin.Context) {
+			c.Redirect(http.StatusPermanentRedirect, "/web")
 		})
 	}
 
