@@ -10,7 +10,7 @@ import (
 )
 
 func mustFS(embeddedFS *embed.FS) http.FileSystem {
-	sub, err := fs.Sub(embeddedFS, "frontend/build")
+	sub, err := fs.Sub(embeddedFS, "frontend/dist")
 
 	if err != nil {
 		panic(err)
