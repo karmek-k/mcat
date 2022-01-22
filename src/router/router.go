@@ -5,6 +5,7 @@ import (
 	"io/fs"
 	"net/http"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/karmek-k/mcat/src/controllers"
 )
@@ -36,6 +37,9 @@ func SetupRouter(embeddedFS *embed.FS) *gin.Engine {
 
 	api := r.Group("/api")
 	{
+		// TODO: dangerous!
+		api.Use(cors.Default())
+
 		tracks := api.Group("/tracks")
 		{
 			tracks.GET("/", controllers.TrackList)
